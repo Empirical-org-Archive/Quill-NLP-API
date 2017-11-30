@@ -66,4 +66,4 @@ def test_sentence(sentence):
     print('Sentence: {}'.format(sentence))
     print('P(positive) = {:.3f} :'.format(positive_prob), 
           'Positive' if positive_prob > 0.5 else 'Negative')
-    return positive_prob
+    return float(positive_prob)
