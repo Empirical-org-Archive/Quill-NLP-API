@@ -1,6 +1,0 @@
-Flask
-nltk
-numpy
-spacy
-tensorflow
-tflearn
