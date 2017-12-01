@@ -1,6 +1,6 @@
-Flask==0.12.2
-nltk==3.2.4
-numpy==1.12.1
-spacy==1.8.2
-tensorflow==1.1.0
-tflearn==0.3.2
+Flask
+nltk
+numpy
+spacy
+tensorflow
+tflearn
