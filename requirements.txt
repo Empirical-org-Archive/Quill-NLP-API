@@ -1,1 +1,5 @@
+Flask
 spacy
+nltk
+tensorflow
+tflearn
