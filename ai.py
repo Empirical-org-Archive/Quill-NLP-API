@@ -12,7 +12,7 @@ def build_model():
     tf.reset_default_graph()
     
     #### Your code ####
-    net = tflearn.input_data([None, 1200])                          # Input
+    net = tflearn.input_data([None, 5380])          # Input len(vocab)
     net = tflearn.fully_connected(net, 200, activation='ReLU')      # Hidden
     net = tflearn.fully_connected(net, 25, activation='ReLU')      # Hidden
     net = tflearn.fully_connected(net, 2, activation='softmax')   # Output
@@ -22,18 +22,20 @@ def build_model():
     return model
 
 model = build_model()
-model.load('./data/model.tfl')
+#model.load('./data/participle_model.tfl')
+model.load('./../../Quill/Quill-NLP-Tools-and-Datasets/participle_model.tfl')
 
 import csv
 word2idx = {}
-for key, val in csv.reader(open("./data/vocabindex.csv")):
+for key, val in \
+        csv.reader(open("../../Quill/Quill-NLP-Tools-and-Datasets/participlevocabindex.csv")):
     word2idx[key] = int(val)
 
 def textStringToPOSArray(text):
     doc = nlp(text)
     tags = []
     for word in doc:
-        tags.append(word.pos_)
+        tags.append(word.tag_)
     return tags
 
 def find_ngrams(input_list, n):
@@ -54,7 +56,7 @@ def textToTrigrams(text):
     return trigramsToDictKeys(getPOSTrigramsForTextString(text))
 
 def text_to_vector(text):
-    wordVector = np.zeros(1200)
+    wordVector = np.zeros(5380)
     for word in textToTrigrams(text):
         index = word2idx.get(word, None)
         if index != None:
