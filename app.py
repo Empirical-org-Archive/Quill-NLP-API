@@ -1,7 +1,8 @@
 # coding=utf8
 from flask import Flask, jsonify, request
 import pos
-import ai
+from qfragment import check
+
 app = Flask(__name__)
 
 @app.route("/")
@@ -18,7 +19,8 @@ def get_pos():
 
 @app.route("/sentence_or_not", methods=["POST"])
 def sentence_or_not():
-    return jsonify({'text': ai.test_sentence(request.form['text'])})
+    result = check(request.form['text']).to_dict()
+    return jsonify(check(request.form['text']).to_dict())
 
 # run the app.
 if __name__ == "__main__":
