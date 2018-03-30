@@ -18,7 +18,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . /usr/src/app
 
-RUN python -m spacy download en
+RUN python -m spacy download en_core_web_lg
 
 RUN rm /etc/nginx/sites-enabled/default
 COPY flask.conf /etc/nginx/sites-available/
