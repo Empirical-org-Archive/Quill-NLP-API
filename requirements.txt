@@ -3,4 +3,4 @@ spacy
 nltk
 tensorflow
 tflearn
-qfragment==0.0.20
+qfragment==0.0.21
