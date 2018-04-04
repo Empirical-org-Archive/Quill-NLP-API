@@ -10,4 +10,4 @@ conda create -n app spacy Flask gunicorn tensorflow nltk python=3
 source activate app
 pip install tflearn
 python -m spacy download en_core_web_lg
-FLASK_APP=server.py flask run # and boom goes the dynamite
+QUILL_SPACY_MODEL=en_core_web_lg FLASK_APP=app.py flask run # and boom goes the dynamite
