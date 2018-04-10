@@ -1,6 +1,6 @@
 Flask
-spacy
+spacy==2.0.10
 nltk
 tensorflow
 tflearn
-qfragment==0.0.21
+qfragment==0.0.22

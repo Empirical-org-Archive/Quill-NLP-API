@@ -19,14 +19,16 @@ def get_pos():
 
 @app.route("/get_pos_match", methods=["POST"])
 def get_pos_match():
-    val = pos.get_pos_match(request.form['text'], request.form['question_id'])
-    return jsonify({'text': request.form['text'], 'match': val})
+    data = request.get_json()
+    val = pos.get_pos_match(data['text'], data['question_id'])
+    return jsonify({'text': data['text'], 'match': val})
 
 @app.route("/sentence_or_not", methods=["POST"])
 def sentence_or_not():
-    result = check(request.form['text']).to_dict()
-    return jsonify(check(request.form['text']).to_dict())
+    data = request.get_json()
+    result = check(data['text']).to_dict()
+    return jsonify(check(data['text']).to_dict())
 
 # run the app.
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=False,host='0.0.0.0')

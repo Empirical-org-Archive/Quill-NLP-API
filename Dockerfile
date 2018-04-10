@@ -8,26 +8,21 @@ RUN pip install --upgrade pip
 RUN pip install --upgrade wheel
 RUN apt-get -y install nginx supervisor
 RUN pip install --no-cache-dir gunicorn Flask
+ENV LT_URI=http://langaugetool-env.pvmbrmtthd.us-east-1.elasticbeanstalk.com
+ENV QUILL_SPACY_MODEL=en_core_web_lg
 
 RUN mkdir -p /usr/src/app
 RUN mkdir -p /usr/src/app/static
 WORKDIR /usr/src/app
 
 COPY requirements.txt /usr/src/app/
+RUN pip install spacy==2.0.10
+RUN python -m spacy download en_core_web_lg
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . /usr/src/app
 
-RUN python -m spacy download en_core_web_lg
-
-RUN rm /etc/nginx/sites-enabled/default
-COPY flask.conf /etc/nginx/sites-available/
-RUN ln -s /etc/nginx/sites-available/flask.conf /etc/nginx/sites-enabled/flask.conf
-RUN echo "daemon off;" >> /etc/nginx/nginx.conf
-
-RUN mkdir -p /var/log/supervisor
-COPY supervisord.conf /etc/supervisor/conf.d/
-COPY gunicorn.conf /etc/supervisor/conf.d/
-
-EXPOSE 80
-CMD ["/usr/bin/supervisord"]
+ENV FLASK_APP=app.py 
+EXPOSE 5000
+ENTRYPOINT [ "python" ] 
+CMD [ "app.py" ]

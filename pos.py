@@ -1,3 +1,4 @@
+import os
 import spacy
 import copy
 import requests
@@ -12,7 +13,7 @@ def get_POS(sentence):
 
 def get_pos_match(submission, question_id):
   submission_pos = get_POS(submission)
-  url = 'http://localhost:3100' # Replace with context aware variable.
+  url = os.environ['CMS_URL'] or 'http://localhost:3100' # Replace with context aware variable.
   r = requests.get(url + '/questions/' + question_id + '/responses')
   responses = r.json()
   responses_with_pos = []
